@@ -32,6 +32,8 @@ Plugin 'gerw/vim-latex-suite'
 "Plugin 'jpalardy/vim-slime'
 Plugin 'epeli/slimux'
 Plugin 'ivan-krukov/vim-snakemake'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 call vundle#end() 
 filetype plugin indent on     " required!
  
@@ -77,7 +79,8 @@ set cpoptions=aABceFsmq
 ""             +-- :read updates alternative file name
 set laststatus=2 " always show the status line
 set ruler
-set statusline=%t%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
+" old status line
+"set statusline=%t%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 "              | | | | |  |   |      |  |     |    |
 "              | | | | |  |   |      |  |     |    + current 
 "              | | | | |  |   |      |  |     |       column
@@ -90,9 +93,12 @@ set statusline=%t%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 "              | | | | +-- preview flag in square brackets
 "              | | | +-- help flag in square brackets
 "              | | +-- readonly flag in square brackets
-"              | +-- rodified flag in square brackets
+"              | +-- modified flag in square brackets
 "              +-- full path to file in the buffer
 "
+" Air-line status line
+let g:airline_theme='simple'
+let g:airline#extensions#tabline#enabled = 1
 syntax on " syntax highlighting on
 set listchars-=trail:.            " don't show trailing spaces as '.' when typing
 set exrc
@@ -125,7 +131,7 @@ set undofile " save undos in files
 let b:cwd=expand("%:p:h")
 let b:vimlocal=b:cwd."/.local.vimrc"
 if (filereadable(b:vimlocal))
-	execute "source ".b:vimlocal
+  execute "source ".b:vimlocal
 endif
 
 " Enable copy-paste from tmux
