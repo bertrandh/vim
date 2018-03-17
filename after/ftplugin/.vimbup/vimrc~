@@ -30,9 +30,9 @@ Plugin 'L9'
 Plugin 'gerw/vim-latex-suite'
 ""Plugin 'ivanov/vim-ipython'
 "Plugin 'jalvesaq/Nvim-R' 
-if !exists("b:ft_rmd") "If .Rmd file source modif slime.vim as rmarkdown.vim in ftplugin
-  Plugin 'jpalardy/vim-slime'
-endif
+"if !exists("b:ft_rmd")
+"  Plugin 'jpalardy/vim-slime'
+"endif
 "Plugin 'epeli/slimux'
 "Plugin 'ivan-krukov/vim-snakemake'
 Plugin 'vim-airline/vim-airline'
@@ -40,7 +40,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'vim-pandoc/vim-rmarkdown'
-"Plugin 'kana/vim-textobj-user'
+Plugin 'kana/vim-textobj-user'
 call vundle#end() 
 filetype plugin indent on     " required!
  

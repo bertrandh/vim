@@ -1,0 +1,34 @@
+function! s:GetSID(func_name)
+  redir => s:funs | silent! function | redir END
+  let s:funs = split(s:funs, "\n")
+  let s:idx =  match(s:funs, a:func_name)
+  let s:slime_func = s:funs[s:idx]
+  let s:slime_sid = substitute(s:slime_func, '.*<SNR>\([0-9]\+\)_.*', '\1', '')
+  return s:slime_sid
+endfunction
+
+"function! s:SlimeFunc(func_name, func_args)
+  "return function('<SNR>'.<SID>GetSID(a:func_name).'_'.a:func_name).'('.a:func_args.')'
+"  return function('<SNR>'.<SID>GetSID(a:func_name).'_'.a:func_name)(a:func_args)
+"endfunction
+
+function! s:SlimeFunc(func_name)
+  "return function('<SNR>'.<SID>GetSID(a:func_name).'_'.a:func_name).'('.a:func_args.')'
+  return function('<SNR>'.<SID>GetSID(a:func_name).'_'.a:func_name)()
+endfunction
+
+function! s:SlimeOp(func_name)
+  return function('<SNR>'.<SID>GetSID(a:func_name).'_'.a:func_name)
+endfunction
+
+"noremap <SID>Operator :<c-u>call <SID>SlimeFunc("SlimeStoreCurPos", "")<cr>:set opfunc=<SID>SlimeOp("SlimeSendOp")<cr>g@
+noremap <SID>Operator :<c-u>call <SID>SlimeFunc("SlimeStoreCurPos")<cr>:set opfunc=<SID>SlimeOp("SlimeSendOp")<cr>g@
+
+vnoremap ir :<c-u>execute "normal! ?^```{\rjV/^```\rk"<cr>
+onoremap ir :normal Vir<cr>
+nmap <unique> <silent> <Plug>SlimeChunkSend <SID>Operatorir
+
+if !hasmapto('<Plug>SlimeChunkSend', 'n')
+  nmap <c-c><c-r> <Plug>SlimeChunkSend
+endif
+
